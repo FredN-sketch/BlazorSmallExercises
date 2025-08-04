@@ -1,0 +1,20 @@
+﻿@page "/multiplication/{No:int?}"
+@rendermode InteractiveWebAssembly
+<h3>Multiplication</h3>
+@for (int i = 1; i <= 10; i++)
+{
+    <p><a href="multiplication/@i">@i:ans multiplikationstabell</a></p>
+}
+<h3>Multiplication Table for @No</h3>
+
+@for (int i = 1; i <= 10; i++)
+{
+    <p>@No x @i = @(No* i)</p>
+}
+@code {
+    [Parameter]
+    public int No { get; set; }
+
+
+}
+
