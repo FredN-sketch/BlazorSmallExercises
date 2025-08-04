@@ -1,0 +1,12 @@
+﻿
+   @*  <h3 style="color: @Color; text-align: center; font-weight: bold;" > *@
+    <h3 style="color: @Color">
+    @HeaderTitle </h3>
+
+
+@code {
+    [Parameter]
+    public string? HeaderTitle { get; set; }
+    [Parameter]
+    public string? Color { get; set; } = "lightblue";
+}
