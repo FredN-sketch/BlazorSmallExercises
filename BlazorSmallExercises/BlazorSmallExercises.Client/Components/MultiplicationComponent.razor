@@ -1,10 +1,7 @@
-﻿@* @page "/multiplication/{No:int?}" *@
-@rendermode InteractiveWebAssembly
-<h3>MultiplicationComponent</h3>
-@for (int i = 1; i <= 10; i++)
-{
-    <p><a href="multiplication/@i">@i:ans multiplikationstabell</a></p>
-}
+﻿
+<h3>Multiplication</h3>
+<input type="number" @bind="No" placeholder="Enter a number" />
+
 <h3>Multiplication Table for @No</h3>
 
 @for (int i = 1; i <= 10; i++)
