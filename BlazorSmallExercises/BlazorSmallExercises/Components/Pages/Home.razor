@@ -4,15 +4,4 @@
 <PageTitle>Home</PageTitle>
 
 
-<h3>Hello @name</h3>
-<input type="text" @bind="name" placeholder="Enter your name" />
-<input type="button" value="Set name" @onclick="SetName" />
-@code {
-    private string? name;
-    private void SetName()
-    {
-        // This method is called when the button is clicked
-        // The name will be updated automatically due to data binding
-        name = name?.Trim() + "!";
-    }
-}
+<Hello/>

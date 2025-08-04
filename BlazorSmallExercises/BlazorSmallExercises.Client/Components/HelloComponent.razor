@@ -1,0 +1,9 @@
+﻿<h3>Hello @name</h3>
+<input type="text" @bind="name" placeholder="Enter your name" />
+<button @onclick="SetName">Klicka här</button>
+@code {
+    private string? name;
+    private void SetName()
+    {
+    }
+}
