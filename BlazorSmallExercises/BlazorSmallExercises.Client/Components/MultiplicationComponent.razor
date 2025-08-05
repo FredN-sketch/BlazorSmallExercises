@@ -1,6 +1,6 @@
 ﻿
 <h3>Multiplication</h3>
-<input type="number" @bind="No" placeholder="Enter a number" />
+<input type="number" @bind="No" />
 
 <h3>Multiplication Table for @No</h3>
 
@@ -10,7 +10,7 @@
 }
 @code {
     [Parameter]
-    public int No { get; set; }
+    public int No { get; set; } = 1; // Default value to avoid null reference issues
 
 
 }

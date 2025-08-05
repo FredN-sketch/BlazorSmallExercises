@@ -1,0 +1,66 @@
+﻿@page "/productform"
+@using System.ComponentModel.DataAnnotations
+@rendermode InteractiveWebAssembly
+
+<h3>ProductForm</h3>
+<EditForm Model=@Product OnSubmit=@FormSubmitted FormName="Register">
+    <DataAnnotationsValidator />
+    <div>
+        <label for="name">Namn:</label>
+        <InputText @bind-Value="Product.Namn" id="name"></InputText>       
+    </div>
+    <div>
+        <label for="name">Material:</label>
+        <InputText @bind-Value="Product.Material" id="material"></InputText>       
+    </div>
+    <div>
+        <label for="name">Pris:</label>
+        <InputNumber @bind-Value="Product.Pris" id="pris"></InputNumber>     
+    </div>
+    <div>
+        <label for="name">Vikt:</label>
+        <InputNumber @bind-Value="Product.Vikt" id="vikt"></InputNumber>       
+    </div>
+
+    <button type="submit">Skicka</button>
+    <ValidationSummary />
+</EditForm>
+
+@code {
+    private void FormSubmitted(EditContext editContext)
+    {
+        bool formIsValidated = editContext.Validate();
+        if (formIsValidated)
+        {
+            var newProduct = (Productmodel)editContext.Model;
+            // Post to api
+        }
+    }
+
+    private Productmodel Product = new Productmodel();
+    public class Productmodel : IValidatableObject
+    {
+        [Required(ErrorMessage = "Namn är obligatoriskt")]
+        [MinLength(5, ErrorMessage = "Namn måste vara minst 5 tecken.")]
+        public string Namn { get; set; }
+        [Required(ErrorMessage = "Pris är obligatoriskt")]
+        public int Pris { get; set; }
+        [Required(ErrorMessage = "Material är obligatoriskt")]
+        public string Material { get; set; }
+        [Required(ErrorMessage = "Vikt är obligatoriskt")]
+        [Range(1, 100, ErrorMessage = "Vikt är inte inom gränserna")]
+        public int Vikt { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Material.Equals("Plast") | Material.Equals("plast"))
+            {
+                yield return new ValidationResult("Material får inte vara plast", new[] { nameof(Material) });
+            }
+            if (Pris <= 0)
+            {
+                yield return new ValidationResult("Pris måste vara högre än 0", new[] { nameof(Pris) });
+            }
+        }
+    }
+}
