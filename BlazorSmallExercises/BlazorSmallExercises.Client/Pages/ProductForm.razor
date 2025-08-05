@@ -25,15 +25,34 @@
     <button type="submit">Skicka</button>
     <ValidationSummary />
 </EditForm>
+@foreach(var prod in Products)
+{
+    <div>
+        <h4>@prod.Namn</h4>
+        <p>Material: @prod.Material</p>
+        <p>Pris: @prod.Pris</p>
+        <p>Vikt: @prod.Vikt</p>
+    </div>
+}
 
 @code {
+    List<Productmodel> Products = new List<Productmodel>();
+
     private void FormSubmitted(EditContext editContext)
     {
         bool formIsValidated = editContext.Validate();
         if (formIsValidated)
         {
-            var newProduct = (Productmodel)editContext.Model;
-            // Post to api
+            var validProduct = (Productmodel)editContext.Model;
+            Productmodel newProduct = new()
+            {
+                Namn = validProduct.Namn,
+                Pris = validProduct.Pris,
+                Material = validProduct.Material,
+                Vikt = validProduct.Vikt
+            };
+
+            Products.Add(newProduct);
         }
     }
 
