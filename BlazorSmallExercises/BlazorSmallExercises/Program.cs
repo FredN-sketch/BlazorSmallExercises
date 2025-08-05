@@ -1,4 +1,5 @@
 using BlazorSmallExercises.Client.Pages;
+using BlazorSmallExercises.Client.Services;
 using BlazorSmallExercises.Components;
 
 namespace BlazorSmallExercises
@@ -8,7 +9,7 @@ namespace BlazorSmallExercises
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.Services.AddSingleton<IGlobalProductList, GlobalProductList>();
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveWebAssemblyComponents();

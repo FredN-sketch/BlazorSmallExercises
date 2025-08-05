@@ -1,6 +1,8 @@
 ﻿@page "/productform"
 @using System.ComponentModel.DataAnnotations
+@using BlazorSmallExercises.Client.Services
 @rendermode InteractiveWebAssembly
+@inject IGlobalProductList GlobalProductList
 
 <h3>ProductForm</h3>
 <EditForm Model=@Product OnSubmit=@FormSubmitted FormName="Register">
@@ -25,7 +27,7 @@
     <button type="submit">Skicka</button>
     <ValidationSummary />
 </EditForm>
-@foreach(var prod in Products)
+@foreach(var prod in GlobalProductList.Products)
 {
     <div>
         <h4>@prod.Namn</h4>
@@ -36,8 +38,8 @@
 }
 
 @code {
-    List<Productmodel> Products = new List<Productmodel>();
-
+    // List<Productmodel> Products = new List<Productmodel>();
+    
     private void FormSubmitted(EditContext editContext)
     {
         bool formIsValidated = editContext.Validate();
@@ -51,8 +53,9 @@
                 Material = validProduct.Material,
                 Vikt = validProduct.Vikt
             };
-
-            Products.Add(newProduct);
+            GlobalProductList.Products.Add(newProduct);
+            // Products.Add(newProduct);
+            StateHasChanged();
         }
     }
 
